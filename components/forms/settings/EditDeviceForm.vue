@@ -21,10 +21,7 @@
       label="INN:"
       prop="inn"
     >
-      <a-textarea
-        v-model="fields.inn"
-        :rows="8"
-      />
+      <a-input v-model="fields.inn" />
     </a-form-model-item>
     <a-button
       type="primary"

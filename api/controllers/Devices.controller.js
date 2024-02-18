@@ -1,7 +1,7 @@
 import BaseController from '@/api/controllers/Base.controller.js'
 
 class DevicesController extends BaseController {
-  static prefix = '/api/Devices';
+  static prefix = '/api/devices';
 
   getDevices (payload) {
     return this.axios({
@@ -11,29 +11,14 @@ class DevicesController extends BaseController {
     })
   }
 
-  getDevicesList (payload) {
-    return this.axios({
-      method: 'get',
-      url: `${DevicesController.prefix}/list`,
-      params: payload
-    })
-  }
-
-  getDevicesListItems () {
-    return this.axios({
-      method: 'get',
-      url: `${DevicesController.prefix}/listItems`
-    })
-  }
-
-  getPlace (id) {
+  getDevice (id) {
     return this.axios({
       method: 'get',
       url: `${DevicesController.prefix}/${id}`
     })
   }
 
-  createPlace (payload) {
+  createDevice (payload) {
     return this.axios({
       method: 'post',
       data: payload,
@@ -41,7 +26,7 @@ class DevicesController extends BaseController {
     })
   }
 
-  savePlace (payload) {
+  saveDevice (payload) {
     const { id } = payload
 
     return this.axios({
@@ -51,7 +36,7 @@ class DevicesController extends BaseController {
     })
   }
 
-  deletePlace (id) {
+  deleteDevice (id) {
     return this.axios({
       method: 'delete',
       url: `${DevicesController.prefix}/${id}`

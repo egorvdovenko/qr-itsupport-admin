@@ -27,8 +27,12 @@
         slot-scope="item"
       >
         <a-list-item-meta
-          description="Название"
-          :title="item.name"
+          description="Наименование"
+          :title="item.title"
+        />
+        <a-list-item-meta
+          description="INN"
+          :title="item.inn"
         />
         <a-dropdown-button
           slot="actions"
@@ -85,7 +89,7 @@ export default {
   },
   watch: {
     '$route.query' () {
-      this.getDevicesList()
+      this.getDevices()
     }
   },
   mounted () {
@@ -94,13 +98,13 @@ export default {
       { name: 'Устройства' }
     ])
 
-    this.getDevicesList()
+    this.getDevices()
   },
   methods: {
-    getDevicesList (page = this.page) {
+    getDevices (page = this.page) {
       this.isGetDevicesRequestPending = true
       this.$api.devicesController
-        .getDevicesList({
+        .getDevices({
           page,
           pageSize: this.pagination.pageSize
         })
@@ -112,10 +116,10 @@ export default {
           this.isGetDevicesRequestPending = false
         })
     },
-    deleteDevice ({ id, name }) {
+    deleteDevice ({ id, title }) {
       this.$confirm({
         title: 'Удаление элемента',
-        content: `Вы собираетесь удалить устройство «${name}». Вы уверены, что хотите это сделать?`,
+        content: `Вы собираетесь удалить устройство «${title}». Вы уверены, что хотите это сделать?`,
         okText: 'Да',
         cancelText: 'Нет',
         onOk: () => {
@@ -123,7 +127,7 @@ export default {
             .deleteDevice(id)
             .then(() => {
               this.$message.success('Устройство успешно удалено')
-              this.getDevicesList()
+              this.getDevices()
             })
         }
       })
