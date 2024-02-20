@@ -31,8 +31,12 @@
           :title="item.title"
         />
         <a-list-item-meta
-          description="INN"
-          :title="item.inn"
+          description="Инвентарный номер"
+          :title="item.inventoryNumber"
+        />
+        <a-list-item-meta
+          description="Расположение"
+          :title="item.location"
         />
         <a-dropdown-button
           slot="actions"

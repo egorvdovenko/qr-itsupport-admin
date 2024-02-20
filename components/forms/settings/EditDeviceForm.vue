@@ -18,10 +18,17 @@
     </a-form-model-item>
     <a-form-model-item
       has-feedback
-      label="INN:"
-      prop="inn"
+      label="Инвентарный номер:"
+      prop="inventoryNumber"
     >
-      <a-input v-model="fields.inn" />
+      <a-input v-model="fields.inventoryNumber" />
+    </a-form-model-item>
+    <a-form-model-item
+      has-feedback
+      label="Расположение:"
+      prop="location"
+    >
+      <a-input v-model="fields.location" />
     </a-form-model-item>
     <a-button
       type="primary"
@@ -44,7 +51,11 @@ export default {
       type: String,
       default: null
     },
-    inn: {
+    inventoryNumber: {
+      type: String,
+      default: null
+    },
+    location: {
       type: String,
       default: null
     }
@@ -54,7 +65,8 @@ export default {
       isSubmitRequestPending: false,
       fields: {
         title: null,
-        inn: null
+        inventoryNumber: null,
+        location: null
       },
       rules: {
         title: [
@@ -64,7 +76,14 @@ export default {
             trigger: 'change'
           }
         ],
-        inn: [
+        inventoryNumber: [
+          {
+            required: true,
+            message: 'Поле является обязательным для заполнения',
+            trigger: 'change'
+          }
+        ],
+        location: [
           {
             required: true,
             message: 'Поле является обязательным для заполнения',
