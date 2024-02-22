@@ -79,6 +79,10 @@ export default {
             {
               title: 'Устройства',
               link: '/settings/devices'
+            },
+            {
+              title: 'Сервисы',
+              link: '/settings/services'
             }
           ]
         }
