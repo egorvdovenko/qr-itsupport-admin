@@ -87,6 +87,10 @@ export default {
             {
               title: 'Тикеты',
               link: '/settings/tickets'
+            },
+            {
+              title: 'Пользователи',
+              link: '/settings/users'
             }
           ]
         }

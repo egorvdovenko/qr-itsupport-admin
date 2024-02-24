@@ -1,6 +1,7 @@
 import devicesRoutingModule from './settings/devices-routing.module.js'
 import servicesRoutingModule from './settings/services-routing.module.js'
 import ticketsRoutingModule from './settings/tickets-routing.module.js'
+import usersRoutingModule from './settings/users-routing.module.js'
 
 export default [
   {
@@ -9,7 +10,8 @@ export default [
     children: [
       devicesRoutingModule,
       servicesRoutingModule,
-      ticketsRoutingModule
+      ticketsRoutingModule,
+      usersRoutingModule
     ]
   }
 ]
