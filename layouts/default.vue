@@ -83,6 +83,10 @@ export default {
             {
               title: 'Сервисы',
               link: '/settings/services'
+            },
+            {
+              title: 'Тикеты',
+              link: '/settings/tickets'
             }
           ]
         }
