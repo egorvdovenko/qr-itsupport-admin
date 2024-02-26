@@ -34,10 +34,6 @@
           description="Наименование"
           :title="item.title"
         />
-        <a-list-item-meta
-          description="Описание"
-          :title="item.description"
-        />
         <a-list-item-meta description="Статус">
           <a-tag
             slot="title"
