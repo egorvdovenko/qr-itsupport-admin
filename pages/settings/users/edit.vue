@@ -16,6 +16,7 @@
       v-else
       v-bind="user"
       :services="services"
+      :tickets="tickets"
       @success="onSuccess"
     />
   </app-wrapper>
@@ -41,7 +42,8 @@ export default {
     return {
       isGetUserRequestPending: false,
       user: null,
-      services: []
+      services: [],
+      tickets: []
     }
   },
   mounted () {
@@ -56,6 +58,7 @@ export default {
     }
 
     this.getServices()
+    this.getTickets()
   },
   methods: {
     getUser () {
@@ -74,6 +77,13 @@ export default {
         .getServices()
         .then(({ data: { items } }) => {
           this.services = items
+        })
+    },
+    getTickets () {
+      this.$api.ticketsController
+        .getTickets({ userId: this.id })
+        .then(({ data: { items } }) => {
+          this.tickets = items
         })
     },
     onSuccess (id) {

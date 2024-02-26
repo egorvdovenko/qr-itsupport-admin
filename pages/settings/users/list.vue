@@ -30,10 +30,6 @@
           description="Email"
           :title="item.email"
         />
-        <a-list-item-meta
-          description="Сервис"
-          :title="item.service.city"
-        />
         <a-list-item-meta description="Статус">
           <a-tag
             slot="title"
