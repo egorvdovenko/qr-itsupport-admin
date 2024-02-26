@@ -94,6 +94,10 @@ export default {
       type: Number,
       default: null
     },
+    userId: {
+      type: Number,
+      default: null
+    },
     title: {
       type: String,
       default: null
@@ -181,6 +185,7 @@ export default {
       this.$api.ticketsController
         .saveTicket({
           id: this.id,
+          userId: this.userId,
           ...this.fields
         })
         .then(() => {
