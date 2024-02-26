@@ -1,14 +1,14 @@
 import BaseController from '@/api/controllers/Base.controller.js'
 
-class AccountController extends BaseController {
-  static prefix = '/api/Account'
+class AuthController extends BaseController {
+  static prefix = '/api/auth'
 
   registration (payload) {
     return this.axios({
       method: 'post',
       data: payload,
       baseURL: this.config.investAdminApiUrl,
-      url: `${AccountController.prefix}/register`
+      url: `${AuthController.prefix}/register`
     })
   }
 
@@ -16,7 +16,7 @@ class AccountController extends BaseController {
     return this.axios({
       method: 'get',
       baseURL: this.config.investAdminApiUrl,
-      url: `${AccountController.prefix}/profile`
+      url: `${AuthController.prefix}/profile`
     })
   }
 
@@ -25,7 +25,7 @@ class AccountController extends BaseController {
       method: 'post',
       data: payload,
       baseURL: this.config.investAdminApiUrl,
-      url: `${AccountController.prefix}/profile`
+      url: `${AuthController.prefix}/profile`
     })
   }
 
@@ -34,7 +34,7 @@ class AccountController extends BaseController {
       method: 'post',
       data: payload,
       baseURL: this.config.investAdminApiUrl,
-      url: `${AccountController.prefix}/password/reset/sendEmail`
+      url: `${AuthController.prefix}/password/reset/sendEmail`
     })
   }
 
@@ -43,9 +43,9 @@ class AccountController extends BaseController {
       method: 'post',
       data: payload,
       baseURL: this.config.investAdminApiUrl,
-      url: `${AccountController.prefix}/password/reset`
+      url: `${AuthController.prefix}/password/reset`
     })
   }
 }
 
-export default AccountController
+export default AuthController

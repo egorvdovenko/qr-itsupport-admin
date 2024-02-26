@@ -62,7 +62,7 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    // 'nuxt-token-auth-module',
+    'nuxt-token-auth-module',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios'
   ],
@@ -84,7 +84,7 @@ export default {
   */
   router: {
     middleware: [
-      // 'tokenAuth'
+      'tokenAuth'
     ]
   },
   tokenAuth,
