@@ -30,6 +30,12 @@
     >
       <a-input v-model="fields.location" />
     </a-form-model-item>
+    <a-form-model-item
+      v-if="id"
+      label="QR код:"
+    >
+      <qr-code-generator :json-object="fields" />
+    </a-form-model-item>
     <a-button
       type="primary"
       html-type="submit"
@@ -41,7 +47,10 @@
 </template>
 
 <script>
+import QrCodeGenerator from '@/components/QrCodeGenerator.vue'
+
 export default {
+  components: { QrCodeGenerator },
   props: {
     id: {
       type: Number,
