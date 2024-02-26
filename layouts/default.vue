@@ -74,25 +74,20 @@ export default {
       menuModel: this.getMenuModel(),
       sidebarListItems: [
         {
-          title: 'Настройки',
-          children: [
-            {
-              title: 'Устройства',
-              link: '/settings/devices'
-            },
-            {
-              title: 'Сервисы',
-              link: '/settings/services'
-            },
-            {
-              title: 'Тикеты',
-              link: '/settings/tickets'
-            },
-            {
-              title: 'Пользователи',
-              link: '/settings/users'
-            }
-          ]
+          title: 'Устройства',
+          link: '/settings/devices'
+        },
+        {
+          title: 'Сервисы',
+          link: '/settings/services'
+        },
+        {
+          title: 'Тикеты',
+          link: '/settings/tickets'
+        },
+        {
+          title: 'Пользователи',
+          link: '/settings/users'
         }
       ]
     }
