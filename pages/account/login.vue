@@ -5,9 +5,6 @@
       @success="onSuccess"
     />
     <a-space direction="vertical">
-      <!-- <nuxt-link :to="{ name: 'RestorePassword' }">
-        Забыли пароль?
-      </nuxt-link> -->
       <span>
         У вас ещё нет аккаунта?
         <nuxt-link :to="{ name: 'Registration' }">
@@ -31,6 +28,9 @@ export default {
       default: null
     }
   },
+  head: {
+    title: 'Вход'
+  },
   methods: {
     onSuccess () {
       if (this.returnUrl) {
@@ -39,9 +39,6 @@ export default {
         this.$router.push('/')
       }
     }
-  },
-  head: {
-    title: 'Вход'
   }
 }
 </script>
