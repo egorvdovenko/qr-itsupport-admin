@@ -66,6 +66,29 @@
         show-icon
       />
     </a-form-model-item>
+    <a-form-model-item label="Документы:">
+      <app-space direction="vertical">
+        <app-image-previewer>
+          <template #upload="{ handlePreview }">
+            <a-upload
+              multiple
+              :file-list="fields.documents"
+              @change="onDocumentChange"
+              @preview="handlePreview"
+            >
+              <a-button>
+                <a-icon type="plus" /> Добавить
+              </a-button>
+            </a-upload>
+          </template>
+        </app-image-previewer>
+        <a-alert
+          message="Размер загружаемого файла не должен превышать 10 МБ"
+          type="info"
+          show-icon
+        />
+      </app-space>
+    </a-form-model-item>
     <a-form-model-item label="Выполнен:">
       <a-switch v-model="fields.isDone" />
     </a-form-model-item>
@@ -80,9 +103,15 @@
 </template>
 
 <script>
+import FileService from '@/core/services/FileService'
+
 export default {
   props: {
     devices: {
+      type: Array,
+      default: () => []
+    },
+    documents: {
       type: Array,
       default: () => []
     },
@@ -118,6 +147,7 @@ export default {
         title: null,
         description: null,
         deviceId: null,
+        documents: [],
         isDone: false
       },
       rules: {
@@ -154,6 +184,12 @@ export default {
         if (this[key] !== null && this[key] !== undefined) {
           this.fields[key] = this[key]
         }
+
+        if (this.documents.length) {
+          this.fields.documents = this.documents.map(
+            document => ({ uid: document.id, name: document.title, url: document.base64String })
+          )
+        }
       }
     },
     onSubmit () {
@@ -184,9 +220,15 @@ export default {
       this.isSubmitRequestPending = true
       this.$api.ticketsController
         .saveTicket({
+          ...this.fields,
           id: this.id,
           userId: this.userId,
-          ...this.fields
+          documents: this.fields.documents.map(
+            document => ({
+              title: document.name,
+              base64String: document.url
+            })
+          )
         })
         .then(() => {
           this.$message.success('Тикет успешно сохранен')
@@ -195,6 +237,24 @@ export default {
         .finally(() => {
           this.isSubmitRequestPending = false
         })
+    },
+    onDocumentChange ({ file: changedDocument }) {
+      if (changedDocument.status === 'uploading') {
+        FileService.fileToBase64(changedDocument.originFileObj)
+          .then((base64String) => {
+            this.fields.documents.push({ uid: changedDocument.uid, name: changedDocument.name, url: base64String })
+          })
+          .catch((error) => {
+            // eslint-disable-next-line no-console
+            console.error('Error converting file to base64:', error)
+          })
+      }
+
+      if (changedDocument.status === 'removed') {
+        this.fields.documents.splice(
+          this.fields.documents.findIndex(document => document.uid === changedDocument.uid), 1
+        )
+      }
     }
   }
 }
