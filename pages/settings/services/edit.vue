@@ -11,7 +11,7 @@
         Создание сервиса
       </template>
     </h2>
-    <a-spin v-if="isGetServiceRequestPending" />
+    <a-spin v-if="$fetchState.pending" />
     <edit-service-form
       v-else
       v-bind="service"
@@ -38,8 +38,12 @@ export default {
   },
   data () {
     return {
-      isGetServiceRequestPending: false,
       service: null
+    }
+  },
+  fetch () {
+    if (this.id) {
+      this.getService()
     }
   },
   mounted () {
@@ -48,21 +52,13 @@ export default {
       { name: 'Сервисы', link: '/settings/services' },
       { name: this.id ? 'Редактирование' : 'Создание' }
     ])
-
-    if (this.id) {
-      this.getService()
-    }
   },
   methods: {
     getService () {
-      this.isGetServiceRequestPending = true
       this.$api.servicesController
         .getService(this.id)
         .then(({ data: service }) => {
           this.service = service
-        })
-        .finally(() => {
-          this.isGetServiceRequestPending = false
         })
     },
     onSuccess (id) {

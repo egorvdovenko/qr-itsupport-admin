@@ -11,11 +11,12 @@
         Создание тикета
       </template>
     </h2>
-    <a-spin v-if="isGetTicketRequestPending" />
+    <a-spin v-if="$fetchState.pending" />
     <edit-ticket-form
       v-else
       v-bind="ticket"
       :devices="devices"
+      :documents="documents"
       @success="onSuccess"
     />
   </app-wrapper>
@@ -39,10 +40,18 @@ export default {
   },
   data () {
     return {
-      isGetTicketRequestPending: false,
       ticket: null,
-      devices: []
+      devices: [],
+      documents: []
     }
+  },
+  fetch () {
+    if (this.id) {
+      this.getTicket()
+    }
+
+    this.getDevices()
+    this.getDocuments()
   },
   mounted () {
     this.$store.commit(`breadcrumb/${UPDATE_ITEMS}`, [
@@ -50,23 +59,13 @@ export default {
       { name: 'Тикеты', link: '/settings/tickets' },
       { name: this.id ? 'Редактирование' : 'Создание' }
     ])
-
-    if (this.id) {
-      this.getTicket()
-    }
-
-    this.getDevices()
   },
   methods: {
     getTicket () {
-      this.isGetTicketRequestPending = true
       this.$api.ticketsController
         .getTicket(this.id)
         .then(({ data: ticket }) => {
           this.ticket = ticket
-        })
-        .finally(() => {
-          this.isGetTicketRequestPending = false
         })
     },
     getDevices () {
@@ -74,6 +73,13 @@ export default {
         .getDevices()
         .then(({ data: { items } }) => {
           this.devices = items
+        })
+    },
+    getDocuments () {
+      this.$api.documentsController
+        .getDocuments({ userId: this.id })
+        .then(({ data: { items } }) => {
+          this.documents = items
         })
     },
     onSuccess (id) {

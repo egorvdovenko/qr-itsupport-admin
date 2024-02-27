@@ -11,7 +11,7 @@
         Создание пользователя
       </template>
     </h2>
-    <a-spin v-if="isGetUserRequestPending" />
+    <a-spin v-if="$fetchState.pending" />
     <edit-user-form
       v-else
       v-bind="user"
@@ -40,19 +40,12 @@ export default {
   },
   data () {
     return {
-      isGetUserRequestPending: false,
       user: null,
       services: [],
       tickets: []
     }
   },
-  mounted () {
-    this.$store.commit(`breadcrumb/${UPDATE_ITEMS}`, [
-      { name: 'Настройки' },
-      { name: 'Пользователи', link: '/settings/users' },
-      { name: this.id ? 'Редактирование' : 'Создание' }
-    ])
-
+  fetch () {
     if (this.id) {
       this.getUser()
     }
@@ -60,16 +53,19 @@ export default {
     this.getServices()
     this.getTickets()
   },
+  mounted () {
+    this.$store.commit(`breadcrumb/${UPDATE_ITEMS}`, [
+      { name: 'Настройки' },
+      { name: 'Пользователи', link: '/settings/users' },
+      { name: this.id ? 'Редактирование' : 'Создание' }
+    ])
+  },
   methods: {
     getUser () {
-      this.isGetUserRequestPending = true
       this.$api.usersController
         .getUser(this.id)
         .then(({ data: user }) => {
           this.user = user
-        })
-        .finally(() => {
-          this.isGetUserRequestPending = false
         })
     },
     getServices () {

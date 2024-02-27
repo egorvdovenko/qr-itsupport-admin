@@ -11,7 +11,7 @@
         Создание устройства
       </template>
     </h2>
-    <a-spin v-if="isGetDeviceRequestPending" />
+    <a-spin v-if="$fetchState.pending" />
     <edit-device-form
       v-else
       v-bind="device"
@@ -38,8 +38,12 @@ export default {
   },
   data () {
     return {
-      isGetDeviceRequestPending: false,
       device: null
+    }
+  },
+  fetch () {
+    if (this.id) {
+      this.getDevice()
     }
   },
   mounted () {
@@ -48,21 +52,13 @@ export default {
       { name: 'Устройства', link: '/settings/devices' },
       { name: this.id ? 'Редактирование' : 'Создание' }
     ])
-
-    if (this.id) {
-      this.getDevice()
-    }
   },
   methods: {
     getDevice () {
-      this.isGetDeviceRequestPending = true
       this.$api.devicesController
         .getDevice(this.id)
         .then(({ data: device }) => {
           this.device = device
-        })
-        .finally(() => {
-          this.isGetDeviceRequestPending = false
         })
     },
     onSuccess (id) {
