@@ -77,7 +77,7 @@ export default {
     },
     getDocuments () {
       this.$api.documentsController
-        .getDocuments({ userId: this.id })
+        .getDocuments({ ticketId: this.id })
         .then(({ data: { items } }) => {
           this.documents = items
         })
