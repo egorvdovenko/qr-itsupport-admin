@@ -1,0 +1,14 @@
+version: '3'
+services:
+  app:
+    image: qr-itsupport-admin
+    container_name: qr-itsupport-admin
+    ports:
+      - "8020:8020"
+    environment:
+      - NUXT_HOST=0.0.0.0
+      - NUXT_PORT=8020
+      - ENVIRONMENT=production
+      - URL=http://localhost:8020
+      - API_URL=http://0.0.0.0:8000
+      - DOMAIN=0.0.0.0
