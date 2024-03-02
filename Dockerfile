@@ -10,6 +10,14 @@ COPY package*.json ./
 # Expose the app's port
 EXPOSE 8020
 
+# Set environment variables
+ENV NUXT_HOST=0.0.0.0
+ENV NUXT_PORT=8020
+ENV ENVIRONMENT=production
+ENV URL=http://0.0.0.0:8020
+ENV API_URL=http://0.0.0.0:8000
+ENV DOMAIN=0.0.0.0
+
 # Install app dependencies
 RUN npm install
 
