@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install app dependencies (separate step to leverage Docker layer caching)
-RUN npm install --production
+RUN npm ci
 
 # Bundle app source
 COPY . .
