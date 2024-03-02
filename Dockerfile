@@ -7,6 +7,15 @@ WORKDIR /usr/src/app
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
+# Install app dependencies (separate step to leverage Docker layer caching)
+RUN npm install --production
+
+# Bundle app source
+COPY . .
+
+# Build app
+RUN npm run build
+
 # Expose the app's port
 EXPOSE 8020
 
@@ -17,15 +26,6 @@ ENV ENVIRONMENT=production
 ENV URL=http://135.125.169.133:8020
 ENV API_URL=http://135.125.169.133:8000
 ENV DOMAIN=135.125.169.133
-
-# Install app dependencies
-RUN npm install
-
-# Bundle app source
-COPY . .
-
-# Build app
-RUN npm run build
 
 # Define the command to run your app
 CMD ["npm", "start"]
