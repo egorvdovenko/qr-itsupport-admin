@@ -25,7 +25,30 @@
     </a-form-model-item>
     <a-form-model-item
       has-feedback
-      label="Сервисы:"
+      label="Роль:"
+      prop="role"
+    >
+      <a-select
+        v-model="fields.role"
+        placeholder="Выберите роль"
+      >
+        <a-select-option
+          v-for="(value, key) in USER_ROLE"
+          :key="key"
+          :value="value"
+        >
+          <a-row
+            type="flex"
+            justify="space-between"
+          >
+            <a-col>{{ value }}</a-col>
+          </a-row>
+        </a-select-option>
+      </a-select>
+    </a-form-model-item>
+    <a-form-model-item
+      has-feedback
+      label="Сервис:"
       prop="serviceId"
     >
       <a-select
@@ -96,6 +119,11 @@
 </template>
 
 <script>
+const USER_ROLE = {
+  ADMIN: 'Admin',
+  USER: 'User'
+}
+
 export default {
   props: {
     services: {
@@ -104,6 +132,10 @@ export default {
     },
     id: {
       type: Number,
+      default: null
+    },
+    role: {
+      type: String,
       default: null
     },
     serviceId: {
@@ -129,10 +161,12 @@ export default {
   },
   data () {
     return {
+      USER_ROLE,
       isSubmitRequestPending: false,
       fields: {
         email: null,
         phoneNumber: null,
+        role: null,
         serviceId: null,
         isConfirmed: false
       },
@@ -145,6 +179,13 @@ export default {
           }
         ],
         phoneNumber: [
+          {
+            required: true,
+            message: 'Поле является обязательным для заполнения',
+            trigger: 'change'
+          }
+        ],
+        role: [
           {
             required: true,
             message: 'Поле является обязательным для заполнения',

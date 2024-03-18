@@ -38,7 +38,7 @@
     </a-form-model-item>
     <a-form-model-item
       has-feedback
-      label="Устройства:"
+      label="Устройство:"
       prop="deviceId"
     >
       <a-select
