@@ -41,6 +41,7 @@
       label="Устройство:"
       prop="deviceId"
     >
+      <!-- TODO: possibilty to remove new device -->
       <a-select
         v-if="devices.length"
         v-model="fields.deviceId"

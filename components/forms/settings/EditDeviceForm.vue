@@ -34,6 +34,7 @@
       v-if="id"
       label="QR код:"
     >
+      <!-- TODO: to think about QR code component -->
       <qr-code-generator :json-object="fields" />
     </a-form-model-item>
     <a-button

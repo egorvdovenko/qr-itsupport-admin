@@ -16,6 +16,7 @@
     >
       <a-input v-model="fields.email" />
     </a-form-model-item>
+    <!-- TODO: to think about the phone number format -->
     <a-form-model-item
       has-feedback
       label="Номер телефона:"
@@ -79,6 +80,7 @@
     <a-form-model-item label="Подтвержден:">
       <a-switch v-model="fields.isConfirmed" />
     </a-form-model-item>
+    <!-- TODO: to think about this list component (like the tickets list) -->
     <a-form-model-item
       v-if="id"
       label="Список тикетов:"

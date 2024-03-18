@@ -11,6 +11,7 @@
       Добавить
     </a-button>
     <a-divider />
+    <!-- TODO: think about table component -->
     <a-list
       item-layout="horizontal"
       size="large"
