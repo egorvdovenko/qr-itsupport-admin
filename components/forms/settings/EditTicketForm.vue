@@ -165,13 +165,6 @@ export default {
             message: 'Поле является обязательным для заполнения',
             trigger: 'change'
           }
-        ],
-        deviceId: [
-          {
-            required: true,
-            message: 'Поле является обязательным для заполнения',
-            trigger: 'change'
-          }
         ]
       }
     }
