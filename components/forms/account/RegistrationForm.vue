@@ -83,7 +83,7 @@ export default {
       this.$refs.form.validate((valid) => {
         if (valid) {
           this.isSubmitRequestPending = true
-          this.$api.accountController
+          this.$api.authController
             .registration(this.fields)
             .then(() => {
               this.$emit('success')

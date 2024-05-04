@@ -1,5 +1,5 @@
 import qs from 'qs'
-import AuthController from '@/api/controllers/Auth.controller.js'
+import AuthController from '~/api/controllers/Auth.controller.js'
 import DevicesController from '~/api/controllers/Devices.controller.js'
 import ServicesController from '~/api/controllers/Services.controller.js'
 import TicketsController from '~/api/controllers/Tickets.controller.js'
@@ -15,7 +15,7 @@ export default function ({ $axios, $config }, inject) {
     })
 
   const api = {
-    accountController: new AuthController($axios, $config),
+    authController: new AuthController($axios, $config),
     devicesController: new DevicesController($axios, $config),
     servicesController: new ServicesController($axios, $config),
     ticketsController: new TicketsController($axios, $config),
