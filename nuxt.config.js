@@ -1,4 +1,5 @@
 import tokenAuth from './token-auth.config'
+import tokenClaims from './token-claims.config'
 
 export default {
   /*
@@ -63,6 +64,7 @@ export default {
   */
   modules: [
     'nuxt-token-auth-module',
+    'nuxt-token-claims-module',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios'
   ],
@@ -84,10 +86,12 @@ export default {
   */
   router: {
     middleware: [
-      'tokenAuth'
+      'tokenAuth',
+      'tokenClaims'
     ]
   },
   tokenAuth,
+  tokenClaims,
   build: {
     loaders: {
       less: {

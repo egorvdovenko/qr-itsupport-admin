@@ -16,6 +16,11 @@ export default {
   components: {
     AppWrapper
   },
+  beforeMount () {
+    if (!this.$tokenClaims.check('userRole', 'Admin')) {
+      this.$nuxt.error({ statusCode: 403 })
+    }
+  },
   mounted () {
     this.$store.commit(`breadcrumb/${UPDATE_ITEMS}`, [
       { name: 'Административная панель' }
