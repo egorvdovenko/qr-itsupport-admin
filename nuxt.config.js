@@ -85,6 +85,7 @@ export default {
   ** See https://nuxtjs.org/api/configuration-build/
   */
   router: {
+    base: '/qr-itsupport-admin/',
     middleware: [
       'tokenAuth',
       'tokenClaims'

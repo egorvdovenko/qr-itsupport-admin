@@ -17,9 +17,9 @@ COPY . .
 ENV NUXT_HOST 0.0.0.0
 ENV NUXT_PORT 8020
 ENV ENVIRONMENT production
-ENV URL http://135.125.169.133:8020
-ENV API_URL http://135.125.169.133:8000
-ENV DOMAIN 135.125.169.133
+ENV URL https://ns1.119463.ip-ns.net/qr-itsupport-admin
+ENV API_URL https://ns1.119463.ip-ns.net/qr-itsupport-api
+ENV DOMAIN ns1.119463.ip-ns.net
 
 # Build app
 RUN npm run build

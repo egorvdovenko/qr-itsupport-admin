@@ -19,6 +19,7 @@ export default {
     login: '/account/login'
   },
   cookie: {
-    domain: process.env.DOMAIN
+    domain: process.env.DOMAIN,
+    path: '/qr-itsupport-admin'
   }
 }
