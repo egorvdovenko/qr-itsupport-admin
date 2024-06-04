@@ -15,6 +15,7 @@
     <edit-ticket-form
       v-else
       v-bind="ticket"
+      :users="users"
       :devices="devices"
       :documents="documents"
       @success="onSuccess"
@@ -41,6 +42,7 @@ export default {
   data () {
     return {
       ticket: null,
+      users: [],
       devices: [],
       documents: []
     }
@@ -50,6 +52,7 @@ export default {
       this.getTicket()
     }
 
+    this.getUsers()
     this.getDevices()
     this.getDocuments()
   },
@@ -66,6 +69,13 @@ export default {
         .getTicket(this.id)
         .then(({ data: ticket }) => {
           this.ticket = ticket
+        })
+    },
+    getUsers () {
+      this.$api.usersController
+        .getUsers()
+        .then(({ data: { items } }) => {
+          this.users = items
         })
     },
     getDevices () {

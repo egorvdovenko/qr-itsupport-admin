@@ -38,6 +38,35 @@
     </a-form-model-item>
     <a-form-model-item
       has-feedback
+      label="Пользователь:"
+      prop="userId"
+    >
+      <a-select
+        v-model="fields.userId"
+        placeholder="Выберите пользователя"
+      >
+        <a-select-option
+          v-for="user in users"
+          :key="user.id"
+          :value="user.id"
+        >
+          <a-row
+            type="flex"
+            justify="space-between"
+          >
+            <a-col>{{ user.email }}</a-col>
+          </a-row>
+        </a-select-option>
+      </a-select>
+      <a-alert
+        v-if="!users.length"
+        message="Список пользователей пуст. Необходимо заполнить соответствующий раздел"
+        type="info"
+        show-icon
+      />
+    </a-form-model-item>
+    <a-form-model-item
+      has-feedback
       label="Устройство:"
       prop="deviceId"
     >
@@ -108,6 +137,10 @@ import FileService from '@/core/services/FileService'
 
 export default {
   props: {
+    users: {
+      type: Array,
+      default: () => []
+    },
     devices: {
       type: Array,
       default: () => []
@@ -147,6 +180,7 @@ export default {
       fields: {
         title: null,
         description: null,
+        userId: null,
         deviceId: null,
         documents: [],
         isDone: false
