@@ -8,13 +8,13 @@ Vue.use(Router)
 export function createRouter () {
   return new Router({
     mode: 'history',
+    base: '/qr-itsupport-admin/',
     scrollBehavior () {
       return { x: 0, y: 0 }
     },
     routes: [
       {
         path: '/',
-        name: 'Index',
         component: () => import('~/pages/index.vue').then(m => m.default || m)
       },
       ...accountRoutingModule,
