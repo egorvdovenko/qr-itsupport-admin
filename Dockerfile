@@ -13,6 +13,10 @@ RUN npm ci
 # Bundle app source
 COPY . .
 
+# Set environment variables
+ENV API_URL https://ns1.119463.ip-ns.net/qr-itsupport-api
+ENV DOMAIN ns1.119463.ip-ns.net
+
 # Build app
 RUN npm run build
 
